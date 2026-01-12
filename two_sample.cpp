@@ -19,11 +19,35 @@
 #include <vector>
 using namespace std;
 
+/* Group A: weight | food = 1
+count = 5
+sum = 52.3
+mean = 10.46
+stdev = 0.838451
+median = 10.1
+min = 9.6
+max = 11.5
+  0th percentile = 9.6
+ 25th percentile = 9.9
+ 50th percentile = 10.1
+ 75th percentile = 11.2
+100th percentile = 11.5*/
+
 //REQUIRES: data contains at least 2 elements
 //EFFECTS: Prints descriptive statistics for the given data
 void print_descriptive_stats(vector<double> data) {
-  // TODO: Implement this function, removing the assert(false); placeholder.
-  assert(false);
+  cout << "count = " << count(data) << endl;
+  cout << "sum = " << sum(data) << endl;
+  cout << "mean = " << mean(data) << endl;
+  cout << "stdev = " << stdev(data) << endl;
+  cout << "median = " << median(data) << endl;
+  cout << "min = " << min(data) << endl;
+  cout << "max = " << max(data) << endl;
+  cout << "  0th percentile = " << percentile(data, 0) << endl;
+  cout << " 25th percentile = "<< percentile(data, .25) << endl;
+  cout << " 50th percentile = " << percentile(data, .5) << endl;
+  cout << " 75th percentile = " << percentile(data, .75) << endl;
+  cout << "100th percentile = " << percentile(data, 1) << endl;
 }
 
 //REQUIRES: Nothing
@@ -33,16 +57,21 @@ void print_descriptive_stats(vector<double> data) {
 //          resamples of original samples data_A and data_B.
 vector<double> mean_diff_sampling_distribution(
   vector<double> data_A, vector<double> data_B) {
-  // TODO: Implement this function, removing the assert(false); placeholder.
-
   // HINT: Repeat the following 1000 times:
   //   1. Generate bootstrap resamples for data_A and data_B by
   //      calling the bootstrap_resample() function from the library module.
   //      Make sure to pass in the iteration number as the sample_num.
   //   2. Compute the difference in means between the resamples
   //   3. Add the computed value to a vector
-  
-  assert(false);
+    vector<double> mean_difference;
+    for (int i = 0; i < 1000; i++){
+      vector<double> resampleA = bootstrap_resample(data_A,i);
+      vector<double> resampleB = bootstrap_resample(data_B,i);
+      double difference = (mean(resampleA) - mean(resampleB));
+      mean_difference.push_back(difference);
+    }
+
+    return mean_difference;
 }
 
 //REQUIRES: v is not empty
@@ -52,15 +81,14 @@ vector<double> mean_diff_sampling_distribution(
 //          as a pair of upper and lower bounds. For example, the bounds on a
 //          confidence interval with width 0.8 are the 10th and 90th percentiles.
 pair<double, double> confidence_interval(vector<double> v, double width) {
-  // TODO: Implement this function, removing the assert(false); placeholder.
-  
   // HINT: Use the percentile function as a helper
   //       to compute the lower and upper bounds.
 
   // HINT: You can return a pair like this:
   //   return {lower, upper};
-  
-  assert(false);
+  double lower = 0.5 - width/2;
+  double upper = 0.5 + width/2;
+  return {percentile(v, lower),  percentile(v, upper)};
 }
 
 void two_sample_analysis(string file_name, string filter_column_name,
