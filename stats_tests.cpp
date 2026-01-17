@@ -139,3 +139,21 @@ void test_mean_zero() {
 
   cout << "PASS!" << endl;
 }
+
+void other() {
+  cout << "other" << endl;
+  vector<double> data = {};
+  // empty vector
+  assert(count(data) == 0);
+
+  // one number for sum
+  data.push_back(2);
+  assert(sum(data) == 2);
+
+  //median for an odd number of data points
+  data.push_back(1);
+  assert(median(data) == 1);
+  cout << "PASS!" << endl;
+
+  // when percentile is 0 or 1
+}

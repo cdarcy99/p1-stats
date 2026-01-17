@@ -13,6 +13,8 @@ int count(vector<double> v) {
 }
 
 double sum(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 0);
     // Create a sum value thats 0
     double sum = 0;
     for(size_t i = 0; i < v.size(); i++){
@@ -23,11 +25,15 @@ double sum(vector<double> v) {
 }
 
 double mean(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 0);
     // Divide the sum by the number of values
     return sum(v)/count(v);
 }
 
 double median(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 0);
     double median;
     // Sort the vector by value
     std::sort(v.begin(), v.end());
@@ -43,6 +49,8 @@ double median(vector<double> v) {
 } 
 
 double min(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 0);
     // Sort the vector
     std::sort(v.begin(), v.end());
     // Return the first value, it will be the minimum
@@ -50,6 +58,8 @@ double min(vector<double> v) {
 }
 
 double max(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 0);
     // Sort the vector
     std::sort(v.begin(), v.end());
     // Recturn the last value, it will the the maximum
@@ -57,6 +67,8 @@ double max(vector<double> v) {
 }
 
 double stdev(vector<double> v) {
+    // Check v isn't empty
+    assert(v.size() > 1);
     double sum = 0;
     double m = mean(v);
     // For every value in the vector add to the sum the difference between the mean the value squared
@@ -68,6 +80,9 @@ double stdev(vector<double> v) {
 }
 
 double percentile(vector<double> v, double p) {
+    // Check v isn't empty & p is between 0 and 1
+    assert(v.size() > 0);
+    assert(p >= 0 && p <= 1);
     double rank;
     double intpart = 0;
     double fractpart = 0;
@@ -95,6 +110,8 @@ double percentile(vector<double> v, double p) {
 }
 
 vector<double> filter(vector<double> v, vector<double> criteria, double target) {
+    // Check v isn't empty & p is between 0 and 1
+    assert(v.size() == criteria.size());
     // Create an emtpy vector to add to
     vector<double> filtered;
     // For every value in the vector if the indexed criteria value matches the target value, add to the emtpy vector
